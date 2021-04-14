@@ -17,6 +17,7 @@ import com.example.modelo.aula.Aula;
 import com.example.services.AulaService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4300", maxAge = 3600)
 public class CentroController {
 
     @Autowired
@@ -50,14 +51,18 @@ public class CentroController {
         return ResponseEntity.status(HttpStatus.CREATED).body(c);
     }
 
-    @PutMapping("/centro")
-    public ResponseEntity<?>  putLienzo(@RequestBody Centro editadoCentro) {
+    @PutMapping("/centro/{idCentro}")
+    public ResponseEntity<?>  putLienzo(@PathVariable String idCentro, @RequestBody Centro centro) {
+        Centro editadoCentro = new Centro();
+        System.out.println(centro.getAulas());
+        editadoCentro = cs.findById(idCentro).get();
+        editadoCentro.setAulas(centro.getAulas());
         cs.edit(editadoCentro).toString();
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @DeleteMapping("/centro")
-    public ResponseEntity<?>  deleteCanvas(@RequestParam String id) {
+    @DeleteMapping("/centro/{id}")
+    public ResponseEntity<?>  deleteCanvas(@PathVariable String id) {
         cs.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

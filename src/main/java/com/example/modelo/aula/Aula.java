@@ -12,6 +12,8 @@ public class Aula {
 	@Id
 	private String id;
 	@Column
+	private String nombre;
+	@Column
 	private int width;
 	@Column
 	private int height;
@@ -26,9 +28,26 @@ public class Aula {
 	@Column
 	private double opacity;
 	@Column
-	private String canvasImage;
+	private double scaleX;
+	@Column
+	private double scaleY;
 
-//	@OneToOne(cascade = {CascadeType.ALL})
+	public double getScaleX() {
+		return scaleX;
+	}
+
+	public void setScaleX(double scaleX) {
+		this.scaleX = scaleX;
+	}
+
+	public double getScaleY() {
+		return scaleY;
+	}
+
+	public void setScaleY(double scaleY) {
+		this.scaleY = scaleY;
+	}
+	//	@OneToOne(cascade = {CascadeType.ALL})
 //	@JoinColumn(name = "idCTRCentro")
 //	private Centro idCTRCentro;
 
@@ -36,8 +55,9 @@ public class Aula {
 
 	}
 
-	public Aula(String id, int width, int height, int left_canvas, int top_canvas, int angle, String fill, double opacity, String canvasImage) {
+	public Aula(String id, String nombre, int width, int height, int left_canvas, int top_canvas, int angle, String fill, double opacity, double scaleX, double scaleY) {
 		this.id = id;
+		this.nombre = nombre;
 		this.width = width;
 		this.height = height;
 		this.left_canvas = left_canvas;
@@ -45,8 +65,16 @@ public class Aula {
 		this.angle = angle;
 		this.fill = fill;
 		this.opacity = opacity;
-		this.canvasImage = canvasImage;
-//		this.idCTRCentro = idCTRCentro;
+		this.scaleX = scaleX;
+		this.scaleY = scaleY;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getId() {
@@ -81,9 +109,6 @@ public class Aula {
 		return opacity;
 	}
 
-	public String getCanvasImage() {
-		return canvasImage;
-	}
 
 //	public Centro getIdCTRCentro() {
 //		return idCTRCentro;
@@ -121,9 +146,6 @@ public class Aula {
 		this.opacity = opacity;
 	}
 
-	public void setCanvasImage(String canvasImage) {
-		this.canvasImage = canvasImage;
-	}
 
 //	public void setIdCTRCentro(Centro idCTRCentro) {
 //		this.idCTRCentro = idCTRCentro;

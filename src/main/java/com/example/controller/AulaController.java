@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.modelo.aula.Aula;
 import com.example.services.AulaService;
-@CrossOrigin(origins = "http://localhost:4300", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 
 @RestController
 public class AulaController {
@@ -66,15 +66,16 @@ public class AulaController {
 		
 	}
 
-	@PutMapping("/lienzo")
-	public ResponseEntity<?>  putLienzo(@RequestBody Aula editadoCanvas) {
+	@PutMapping("/lienzo/{id}")
+	public ResponseEntity<?>  putLienzo(@RequestBody Aula editadoCanvas, @PathVariable String id) {
+		editadoCanvas.setId(id);
 		cs.edit(editadoCanvas).toString();
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 	
-	@DeleteMapping("/lienzo")
-	public ResponseEntity<?>  deleteCanvas(@RequestParam String id) {
+	@DeleteMapping("/lienzo/{id}")
+	public ResponseEntity<?>  deleteCanvas(@PathVariable String id) {
 		cs.deleteById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
